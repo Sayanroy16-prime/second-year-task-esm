@@ -1,0 +1,24 @@
+#include <Wire.h>
+#include <LiquidCrystal_I2C.h>
+
+// Try 0x27 first. If display stays blank, change to 0x3F.
+LiquidCrystal_I2C lcd(0x27, 16, 2);
+// LiquidCrystal_I2C lcd(0x3F, 16, 2);   // use this line instead if needed
+
+void setup() {
+  lcd.init();          // initialize the LCD
+  lcd.backlight();     // turn on backlight
+
+  lcd.setCursor(0, 0); // column 0, row 0
+  lcd.print("Hello world");
+}
+
+void loop() {
+  // seconds since Arduino powered/reset
+  unsigned long seconds = millis() / 1000;
+
+  lcd.setCursor(0, 1);   // column 0, row 1
+  lcd.print("Time: ");
+  lcd.print(seconds);
+  lcd.print(" s   ");    // spaces clear old digits
+}
