@@ -1,0 +1,37 @@
+// RGB LED pins (PWM)
+const int ledR = 9;
+const int ledG = 10;
+const int ledB = 11;
+
+void setup() {
+  pinMode(ledR, OUTPUT);
+  pinMode(ledG, OUTPUT);
+  pinMode(ledB, OUTPUT);
+}
+
+// helper: set RGB color
+void setColor(byte r, byte g, byte b) {
+  analogWrite(ledR, r);
+  analogWrite(ledG, g);
+  analogWrite(ledB, b);
+}
+
+void loop() {
+  // 1. Red -> Green (through yellow)
+  for (int i = 0; i <= 255; i++) {
+    setColor(255 - i, i, 0);   // R goes down, G goes up
+    delay(10);
+  }
+
+  // 2. Green -> Blue (through cyan)
+  for (int i = 0; i <= 255; i++) {
+    setColor(0, 255 - i, i);   // G goes down, B goes up
+    delay(10);
+  }
+
+  // 3. Blue -> Red (through magenta)
+  for (int i = 0; i <= 255; i++) {
+    setColor(i, 0, 255 - i);   // B goes down, R goes up
+    delay(10);
+  }
+}
